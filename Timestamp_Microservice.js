@@ -22,7 +22,7 @@ app.get("/", function (req, res) {
 // your first API endpoint... 
 
 
-app.get("/api/timestamp/:date_string?", (req, res) => {
+app.get("/api/:date?", (req, res) => {
   let dateString = req.params.date_string
   let date
 
