@@ -60,6 +60,26 @@ app.post('/api/shorturl', async (req, res) => {
   });
 });
 
+app.get('/api/shorturl/:short_url',async(req,res) => {
+  const urlshort = parseInt(req.params.short_url)
+
+  const findurlshort = await UrlModel.findOne({short_url : urlshort})
+    try{
+      if(findurlshort){
+        res.redirect(findurlshort.original_url)
+      }
+      else{
+        res.json({error : 'No shorter short url in the given input'})
+      }
+    }
+    catch(err){
+      console.log(err);
+      res.json({error : 'server error'})
+    }
+
+})
+
 app.listen(port, function() {
   console.log(`Listening on port ${port}`);
 });
+
