@@ -7,7 +7,6 @@ const cors = require('cors');
 
 const app = express();
 
-// Basic Configuration
 const port = process.env.PORT || 3000;
 
 mongoose.connect(process.env.MONGO_URI, {
@@ -27,18 +26,18 @@ app.get('/', function(req, res) {
   res.sendFile(process.cwd() + '/views/index.html');
 });
 
-// Your first API endpoint
+
 app.get('/api/hello', function(req, res) {
   res.json({ greeting: 'hello API' });
 });
 
-// Define your URL schema
+
 const urlSchema = new mongoose.Schema({
   original_url: { type: String, required: true },
   short_url: { type: Number, required: true },
 });
 
-// Rename the model to avoid conflicts with the global URL object
+
 const UrlModel = mongoose.model('URL', urlSchema);
 
 app.post('/api/shorturl', async (req, res) => {
